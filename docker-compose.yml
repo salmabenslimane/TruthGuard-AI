@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # Training service
+  training:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: truthguard-training
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CUDA_VISIBLE_DEVICES=-1  # Use CPU by default
+    command: python src/train.py
+
+  # API service
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: truthguard-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MODEL_PATH=/app/models/roberta_fact_checker
+    depends_on:
+      - training
+    restart: unless-stopped
+
+networks:
+  default:
+    name: truthguard-network
