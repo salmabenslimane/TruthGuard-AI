@@ -1,3 +1,46 @@
-venv
-src/__pycache__/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.venv/
+venv/
+env/
+ENV/
+
+# Data
+data/raw/*.tsv
+data/raw/*.csv
+data/processed/
+data/**/cache/
+data/processed/**/*.tsv
+data/processed/**/*.csv
+
+# Models (IMPORTANT!)
 models/cache/
+models/roberta_fact_checker/
+models/**/pytorch_model.bin
+models/**/*.bin
+*.pth
+*.ckpt
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keep folder structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!models/.gitkeep
+!logs/.gitkeep

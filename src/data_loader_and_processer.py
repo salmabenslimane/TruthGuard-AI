@@ -217,10 +217,17 @@ def load_liar_dataset(use_cached=True):
     print(f"Test size: {len(test_df):,}")
     print(f"Total: {len(train_df) + len(val_df) + len(test_df):,}")
     
-    # Save preprocessed data for future use
+
+    if config.USE_SUBSET:
+        print(f"\n⚡ Using subset for faster training: {config.SUBSET_SIZE} examples")
+        train_df = train_df.head(config.SUBSET_SIZE)
+        val_df = val_df.head(int(config.SUBSET_SIZE * 0.1))
+        test_df = test_df.head(int(config.SUBSET_SIZE * 0.1))
+    
+    # Save preprocessed data
     save_processed_data(train_df, val_df, test_df)
     
-    return train_df, val_df, test_df
+    return train_df, val_df, test_df    
 
 
 def preprocess_data(train_df, val_df, test_df, tokenizer):
