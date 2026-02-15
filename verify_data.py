@@ -7,7 +7,7 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
-from src.data_loader_and_preprocessor import load_liar_dataset, get_tokenizer, preprocess_data
+from src.data_loader_and_processer import load_liar_dataset, get_tokenizer, preprocess_data
 import src.config as config
 
 def main():
