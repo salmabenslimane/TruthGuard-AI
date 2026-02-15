@@ -10,6 +10,7 @@ DATA_DIR = BASE_DIR / "data"
 RAW_DATA_DIR = DATA_DIR / "raw"
 PROCESSED_DATA_DIR = DATA_DIR / "processed"
 MODEL_DIR = BASE_DIR / "models"
+MODEL_CACHE_DIR = MODEL_DIR / "cache"  # HuggingFace cache
 LOG_DIR = BASE_DIR / "logs"
 
 # Model configuration
@@ -62,6 +63,10 @@ PROCESSED_TRAIN_FILE = PROCESSED_DATA_DIR / "train_processed.csv"
 PROCESSED_VAL_FILE = PROCESSED_DATA_DIR / "valid_processed.csv"
 PROCESSED_TEST_FILE = PROCESSED_DATA_DIR / "test_processed.csv"
 
+# Set HuggingFace cache directory
+os.environ['TRANSFORMERS_CACHE'] = str(MODEL_CACHE_DIR)
+os.environ['HF_HOME'] = str(MODEL_CACHE_DIR)
+
 # Create directories if they don't exist
-for directory in [DATA_DIR, RAW_DATA_DIR, PROCESSED_DATA_DIR, MODEL_DIR, LOG_DIR]:
+for directory in [DATA_DIR, RAW_DATA_DIR, PROCESSED_DATA_DIR, MODEL_DIR, MODEL_CACHE_DIR, LOG_DIR]:
     directory.mkdir(parents=True, exist_ok=True)

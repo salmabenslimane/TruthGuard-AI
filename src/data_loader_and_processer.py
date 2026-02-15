@@ -290,7 +290,13 @@ def preprocess_data(train_df, val_df, test_df, tokenizer):
 def get_tokenizer():
     """Load the tokenizer for the model"""
     print(f"\nLoading tokenizer: {config.MODEL_NAME}")
-    tokenizer = AutoTokenizer.from_pretrained(config.MODEL_NAME)
+    print(f"Cache directory: {config.MODEL_CACHE_DIR}")
+    
+    tokenizer = AutoTokenizer.from_pretrained(
+        config.MODEL_NAME,
+        cache_dir=config.MODEL_CACHE_DIR
+    )
+    
     print(f"✓ Tokenizer loaded")
     return tokenizer
 
