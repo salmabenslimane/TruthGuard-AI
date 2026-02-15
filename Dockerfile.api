@@ -9,11 +9,14 @@ RUN apt-get update && apt-get install -y \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
-COPY requirements.txt .
+# Upgrade pip first
+RUN pip install --upgrade pip
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install torch separately (cached layer)
+RUN pip install torch==2.0.1 --index-url https://download.pytorch.org/whl/cpu
+# Then install remaining requirements
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
 # Copy source code and API
 COPY api/ ./api/
