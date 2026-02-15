@@ -44,3 +44,26 @@ Thumbs.db
 !data/processed/.gitkeep
 !models/.gitkeep
 !logs/.gitkeep
+# Results backup
+results_backup/
+*.backup
+
+results_backup/cache/
+results_backup/
+*.pth
+*.ckpt
+venv/
+__pycache__/
+*.pyc
+
+models/
+logs/
+data/
+
+.env
+*.pt
+*.bin
+*.pth
+*.ckpt
+
+.DS_Store
